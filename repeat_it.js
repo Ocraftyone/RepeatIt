@@ -22,9 +22,11 @@
                         form: {
                             repeat: {label: "Repeat", type: "number", value: 1},
                             possitionDiff : {label: "Position difference", type: "vector", value: [0, 0, 0]},
-                            rotationDiff : canRotate? {label: "Rotation difference", type: "vector", value: [0, 0, 0]} : null,
+                            rotationDiff : {label: "Rotation difference", type: "vector", value: [0, 0, 0]},
                         },
                         onConfirm(formResult) {
+                            this.hide()
+
                             var elementsToAdd = []
                             Undo.initEdit({elements: elementsToAdd, outliner: true, selection: true})
                             
@@ -39,7 +41,7 @@
                                 }
                             })
 
-                            this.hide()
+                            Undo.finishEdit("Repeat shape")
                         }
                     })
                     option_dialog.show()
@@ -50,5 +52,7 @@
         onunload() {
             repeatAction.delete()
         }
-    })
+    });
+
+
 })()
