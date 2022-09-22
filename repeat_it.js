@@ -32,15 +32,18 @@
                             
                             Cube.selected.forEach(cube, i => {
                                 for (var i = 0; i < formResult.repeat; i++) {
-                                    var newCube = cube.clone()
+                                    var newCube = new Cube()
                                     newCube.addTo(elementsToAdd)
-                                    newCube.translate(formResult.possitionDiff)
+                                    newCube.moveVector(formResult.possitionDiff)
                                     if (canRotate) {
-                                        newCube.rotate(formResult.rotationDiff)
+                                        newCube.rotation.forEach((rotation, i) => {
+                                            newCube.rotation[i] = rotation + formResult.rotationDiff[i]
+                                        })
                                     }
+                                    newCube.init()
                                 }
                             })
-
+                            
                             Undo.finishEdit("Repeat shape")
                         }
                     })
